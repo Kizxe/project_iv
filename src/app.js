@@ -5,6 +5,10 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const studentRoutes = require('./routes/students');
-app.use('/api/students', studentRoutes);
+const authRoutes = require('./routes/auth');
+
+app.use('/api/auth', authRoutes);
+app.use('/api/students', studentRoutes); // boleh protect lepas ni
+
 
 module.exports = app;

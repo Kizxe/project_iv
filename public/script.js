@@ -38,7 +38,8 @@ async function loadStudents() {
   const tbody = document.getElementById('student-tbody');
   tbody.innerHTML = '<tr><td colspan="5" class="loading-row">Loading...</td></tr>';
   try {
-    const res = await fetch(API);
+    const res = await fetch(API), { headers: HEADERS });
+    if (!res.ok) throw new Error('Failed to fetch');
     allStudents = await res.json();
     renderTable(allStudents);
     updateCount(allStudents.length);
@@ -176,3 +177,12 @@ function showToast(msg, type = 'success') {
   t.className = `toast ${type} show`;
   toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
 }
+
+// ambil token dari localStorage
+const token = localStorage.getItem('token');
+if (!token) window.location.href = '/login.html';
+
+const HEADERS = {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${token}`
+};

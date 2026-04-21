@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-icon">◈</span>
+        <span class="brand-name">StudentDB</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" onclick="showSection('list')">
+          <span class="nav-icon">▤</span> All Students
+        </button>
+        <button class="nav-btn" onclick="showSection('add')">
+          <span class="nav-icon">＋</span> Add Student
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="status-dot" id="status-dot"></div>
+        <span id="status-text">Connecting...</span>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <!-- LIST SECTION -->
+      <section id="section-list" class="section active">
+        <div class="section-header">
+          <div>
+            <h1>Students</h1>
+            <p class="subtitle">Manage all registered students</p>
+          </div>
+          <div class="header-actions">
+            <input type="text" id="search-input" class="search-input" placeholder="Search name or course..." oninput="filterStudents()" />
+            <span class="count-badge" id="student-count">0 students</span>
+          </div>
+        </div>
+
+        <div id="toast" class="toast"></div>
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="student-tbody">
+              <tr><td colspan="5" class="loading-row">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ADD SECTION -->
+      <section id="section-add" class="section">
+        <div class="section-header">
+          <div>
+            <h1 id="form-title">Add Student</h1>
+            <p class="subtitle" id="form-subtitle">Fill in the student details below</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <input type="hidden" id="edit-id" />
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="input-name" placeholder="e.g. Ahmad Irfan" />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="input-email" placeholder="e.g. irfan@student.edu.my" />
+          </div>
+          <div class="form-group">
+            <label>Course</label>
+            <input type="text" id="input-course" placeholder="e.g. Computer Science" />
+          </div>
+          <div class="form-actions">
+            <button class="btn-secondary" onclick="resetForm()">Clear</button>
+            <button class="btn-primary" id="submit-btn" onclick="submitForm()">Add Student</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
